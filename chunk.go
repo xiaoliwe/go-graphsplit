@@ -27,8 +27,8 @@ type commPCallback struct {
 	addPadding bool
 }
 
-func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
-	fmt.Println("xxxxx")
+func (cc *commPCallback) OnSuccess(node ipld.Node, node ipld.Node, fsDetail string) {
+	fmt.Println("Begin to calculation of pieceCID,it will take a long time...")
 	commpStartTime := time.Now()
 	carfilepath := path.Join(cc.carDir, node.Cid().String()+".car")
 	cpRes, err := CalcCommP(context.TODO(), carfilepath, cc.rename, cc.addPadding)
@@ -36,6 +36,7 @@ func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
 		log.Fatal(err)
 	}
 	log.Infof("calculation of pieceCID completed, time elapsed: %s", time.Now().Sub(commpStartTime))
+	log.infof("Begin to generate the manifest.csv file.....")
 	// Add node inof to manifest.csv
 	manifestPath := path.Join(cc.carDir, "manifest.csv")
 	_, err = os.Stat(manifestPath)
