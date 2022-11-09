@@ -76,6 +76,11 @@ Qm...,graph-slice-name.car,baga...,16646144,inner-structure-json
 ./graphsplit chunk --car-dir=../17GData/ --slice-size=17289869184 --parallel=2 --graph-name=tp --calc-commp=true --add-padding=false --rename=false --parent-path=../SData/ ../SData/
 ```
 
+### external link example
+```
+http://domain/baga6ea4seaqad2ihnlr4fzyx4ycmir5m5ye73qj3we4hb5yvi5zndcyvsila.car
+```
+
 Import car file to IPFS: 
 ```sh
 ipfs dag import /path/to/car-dir/car-file

@@ -28,7 +28,7 @@ type commPCallback struct {
 }
 
 func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
-	fmt.Println("Begin to calculation of pieceCID,it will take a long time...")
+	fmt.Println("++++++++ Begin to calculation of pieceCID,it will take a long time? +++++++++")
 	commpStartTime := time.Now()
 	carfilepath := path.Join(cc.carDir, node.Cid().String()+".car")
 	cpRes, err := CalcCommP(context.TODO(), carfilepath, cc.rename, cc.addPadding)
