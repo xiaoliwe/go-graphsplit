@@ -63,7 +63,7 @@ func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
 	}
 
 	if err := csvWriter.Write([]string{
-		node.Cid().String(), graphName, "https://111.111.111.11/xxx/" + node.Cid() + ".car", cpRes.Root.String(), strconv.FormatInt(cpRes.PayloadSize, 10), strconv.FormatUint(uint64(cpRes.Size), 10),
+		node.Cid().String(), graphName, "https://111.111.111.11/xxx/" + node.Cid().String() + ".car", cpRes.Root.String(), strconv.FormatInt(cpRes.PayloadSize, 10), strconv.FormatUint(uint64(cpRes.Size), 10),
 	}); err != nil {
 		log.Fatal(err)
 	}
