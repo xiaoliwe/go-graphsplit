@@ -58,12 +58,12 @@ func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
 	defer csvWriter.Flush()
 	if isCreateAction {
 		csvWriter.Write([]string{
-			"playload_cid", "filename", "piece_cid", "payload_size", "piece_size",
+			"playload_cid", "filename", "url", "piece_cid", "payload_size", "piece_size",
 		})
 	}
 
 	if err := csvWriter.Write([]string{
-		node.Cid().String(), node.Cid().String(), cpRes.Root.String(), strconv.FormatInt(cpRes.PayloadSize, 10), strconv.FormatUint(uint64(cpRes.Size), 10), fsDetail,
+		node.Cid().String(), graphName, "https://111.111.111.11/xxx", cpRes.Root.String(), strconv.FormatInt(cpRes.PayloadSize, 10), strconv.FormatUint(uint64(cpRes.Size), 10),
 	}); err != nil {
 		log.Fatal(err)
 	}
