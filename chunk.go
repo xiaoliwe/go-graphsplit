@@ -36,7 +36,7 @@ func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
 		log.Fatal(err)
 	}
 	log.Infof("calculation of pieceCID completed, time elapsed: %s", time.Now().Sub(commpStartTime))
-	log.infof("Begin to generate the manifest.csv file.....")
+	log.Infof("Begin to generate the manifest.csv file.....")
 	// Add node inof to manifest.csv
 	manifestPath := path.Join(cc.carDir, "manifest.csv")
 	_, err = os.Stat(manifestPath)
