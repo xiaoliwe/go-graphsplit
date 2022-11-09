@@ -73,7 +73,7 @@ Qm...,graph-slice-name.car,baga...,16646144,inner-structure-json
 ```
 ### Command example  
 ```
-./graphsplit chunk --car-dir=../17GData/ --slice-size=17289869184 --parallel=2 --graph-name=tplab-test --calc-commp=true --add-padding=false --rename=true --parent-path=../SData/ ../SData/
+./graphsplit chunk --car-dir=../17GData/ --slice-size=17289869184 --parallel=2 --graph-name=tplab-test --calc-commp=true --add-padding=false --rename=false --parent-path=../SData/ ../SData/
 ```
 
 Import car file to IPFS: 
