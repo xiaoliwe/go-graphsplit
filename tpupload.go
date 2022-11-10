@@ -67,7 +67,7 @@ func Upload(ctx context.Context, carDir string) error {
 	records := readCsvFile(carDir + "manifest.csv")
 	fmt.Printf("----The row count is : %v\n ------", len(records))
 
-	for _, line := range records {
+	for _, line := range records[1:] {
 		item := CsvRowData{
 			PayloadCID:  line[0],
 			Filename:    line[1],
