@@ -7,7 +7,6 @@ import (
 	"flag"
 	"fmt"
 
-	"log"
 	"os"
 
 	"github.com/qiniupd/qiniu-go-sdk/syncdata/operation"
@@ -43,16 +42,17 @@ func fileList(file string) []string {
 	return ret
 }
 
-func Upload(ctx context.Context, carDir, bucket string) error {
+func Upload(ctx context.Context, carDir string) error {
 	cf := flag.String("c", "cfg.toml", "config")
 	flag.Parse()
 
 	cnf, err := operation.Load(*cf)
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatal(err)
 	}
 
-	//up := operation.NewUploader(cnf)
+	up := operation.NewUploader(cnf)
+	fmt.Println(up)
 
 	//Get the manifest.csv and read CID of file.
 	records := readCsvFile("../17GData/manifest.csv")

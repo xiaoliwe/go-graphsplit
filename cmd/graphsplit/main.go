@@ -182,11 +182,6 @@ var uploadKodoCmd = &cli.Command{
 	Usage: "upload car files to Kodo",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
-			Name:     "bucket",
-			Required: true,
-			Usage:    "specify the bucket name",
-		},
-		&cli.StringFlag{
 			Name:     "car-dir",
 			Required: true,
 			Usage:    "specify the car file's path",
@@ -195,12 +190,11 @@ var uploadKodoCmd = &cli.Command{
 	Action: func(c *cli.Context) error {
 		ctx := context.Background()
 
-		strBucket := c.String("bucket")
 		strCarDir := c.String("car-dir")
 		if !graphsplit.ExistDir(strCarDir) {
 			return xerrors.Errorf("Unexpected! The path of car-dir does not exist")
 		}
-		return graphsplit.Upload(ctx, strCarDir, strBucket)
+		return graphsplit.Upload(ctx, strCarDir)
 	},
 }
 var importDatasetCmd = &cli.Command{
