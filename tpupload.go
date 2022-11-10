@@ -59,7 +59,7 @@ func Upload(ctx context.Context, carDir string) error {
 	fmt.Println(len(records))
 
 	for _, value := range records {
-		fmt.Println(" %v\n", value)
+		fmt.Printf(" %v\n", value)
 	}
 
 	//Join the car file's path , like : /disk/17GData/xxxxxx.car
