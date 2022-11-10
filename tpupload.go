@@ -22,5 +22,6 @@ func fileList(file string) []string {
 }
 
 func Upload(ctx context.Context, carDir, bucket string) error {
+
 	return nil
 }
