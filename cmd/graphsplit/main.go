@@ -184,7 +184,7 @@ var uploadKodoCmd = &cli.Command{
 		&cli.StringFlag{
 			Name:     "car-dir",
 			Required: true,
-			Usage:    "specify the car file's path",
+			Usage:    "specify the car file's absolute path",
 		},
 	},
 	Action: func(c *cli.Context) error {

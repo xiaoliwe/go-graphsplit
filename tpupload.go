@@ -76,7 +76,9 @@ func Upload(ctx context.Context, carDir string) error {
 			PayloadSize: line[4],
 			PieceSize:   line[5],
 		}
-		fmt.Println("The car filename is:" + carDir + item.PayloadCID + ".car")
+
+		var carFile = carDir + item.PayloadCID + ".car"
+		fmt.Println("The car filename is:" + carFile)
 	}
 
 	return nil
