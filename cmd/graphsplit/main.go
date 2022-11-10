@@ -8,7 +8,7 @@ import (
 
 	"github.com/filedrive-team/go-graphsplit"
 	"github.com/filedrive-team/go-graphsplit/dataset"
-	"github.com/xiaoliwe/go-graphsplit/QNKodo"
+	"github.com/xiaoliwe/go-graphsplit/TPKodo"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
