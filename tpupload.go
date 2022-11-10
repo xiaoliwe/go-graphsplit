@@ -58,8 +58,8 @@ func Upload(ctx context.Context, carDir, bucket string) error {
 	records := readCsvFile("../17GData/manifest.csv")
 	fmt.Println(len(records))
 
-	for value := range records {
-		fmt.Println(" %v\n", records[value])
+	for _, value := range records {
+		fmt.Println(" %v\n", value)
 	}
 
 	//Join the car file's path , like : /disk/17GData/xxxxxx.car
