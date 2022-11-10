@@ -3,9 +3,31 @@ package graphsplit
 import (
 	"bufio"
 	"context"
+	"encoding/csv"
+	"flag"
+	"fmt"
 
+	"log"
 	"os"
+
+	"github.com/qiniupd/qiniu-go-sdk/syncdata/operation"
 )
+
+func readCsvFile(filePath string) [][]string {
+	f, err := os.Open(filePath)
+	if err != nil {
+		log.Fatal("Unable to read input file "+filePath, err)
+	}
+	defer f.Close()
+
+	csvReader := csv.NewReader(f)
+	records, err := csvReader.ReadAll()
+	if err != nil {
+		log.Fatal("Unable to parse file as CSV for "+filePath, err)
+	}
+
+	return records
+}
 
 func fileList(file string) []string {
 	a, err := os.Open(file)
@@ -22,6 +44,23 @@ func fileList(file string) []string {
 }
 
 func Upload(ctx context.Context, carDir, bucket string) error {
+	cf := flag.String("c", "cfg.toml", "config")
+	flag.Parse()
+
+	cnf, err := operation.Load(*cf)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	//up := operation.NewUploader(cnf)
+
+	//Get the manifest.csv and read CID of file.
+	records := readCsvFile("../17GData/manifest.csv")
+	fmt.Println(records)
+
+	//Join the car file's path , like : /disk/17GData/xxxxxx.car
+
+	//upload the car file to kodo
 
 	return nil
 }
