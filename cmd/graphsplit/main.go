@@ -207,7 +207,7 @@ var uploadKodoCmd = &cli.Command{
 					return xerrors.Errorf("Unexpected! The path of car-dir does not exist")
 				}
 				
-				return kodo.Upload(strCarDir,strBucket)
+				return TPKodo.Upload(strCarDir,strBucket)
 			}
 		}
 	}
