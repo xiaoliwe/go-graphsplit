@@ -225,7 +225,8 @@ func Chunk(ctx context.Context, sliceSize int64, parentPath, targetPath, carDir,
 		BuildIpldGraph(ctx, graphFiles, GenGraphName(graphName, graphSliceCount, sliceTotal), parentPath, carDir, parallel, cb)
 		fmt.Printf("cumu-size: %d\n", cumuSize)
 		fmt.Printf(GenGraphName(graphName, graphSliceCount, sliceTotal))
-		fmt.Printf("=================\n")
+		fmt.Printf("--------------------\n")
+
 	}
 	return nil
 }

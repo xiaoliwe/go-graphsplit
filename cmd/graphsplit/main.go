@@ -2,11 +2,13 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"os"
 
 	"github.com/filedrive-team/go-graphsplit"
 	"github.com/filedrive-team/go-graphsplit/dataset"
+	"github.com/xiaoliwe/go-graphsplit/QNKodo"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
@@ -20,6 +22,7 @@ func main() {
 		chunkCmd,
 		restoreCmd,
 		commpCmd,
+		uploadKodoCmd,
 		importDatasetCmd,
 	}
 
@@ -33,6 +36,11 @@ func main() {
 		fmt.Println("Error: ", err)
 		os.Exit(1)
 	}
+
+	// Begion to upload the car files to kodo.
+	cf := flag.String("c", "cfg.toml", "config")
+	flag.Pa
+
 }
 
 var chunkCmd = &cli.Command{
@@ -176,7 +184,34 @@ var commpCmd = &cli.Command{
 		return nil
 	},
 }
+var uploadKodoCmd = &cli.Command{
+	Name:"upload-car",
+	Usage:"upload car files to Kodo",
+	Flags:[]cli.Flag{
+			&cli.StringFlag{
+				Name:"bucket",
+				Required:true,
+				Usage:"specify the bucket name",
+			},
+			&cli.StringFlag{
+				Name:"car-dir",
+				Required:true,
+				Usage:"specify the car file's path"
+			},
+			Action:func(c *cli.Context) error{
+				ctx:=context.Background()
 
+				strBucket:=c.String("bucket")
+				strCarDir := c.String("car-dir")
+				if !graphsplit.ExistDir(carDir) {
+					return xerrors.Errorf("Unexpected! The path of car-dir does not exist")
+				}
+				
+				return kodo.Upload(strCarDir,strBucket)
+			}
+		}
+	}
+}
 var importDatasetCmd = &cli.Command{
 	Name:  "import-dataset",
 	Usage: "import files from the specified dataset",

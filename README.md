@@ -80,6 +80,12 @@ Qm...,graph-slice-name.car,baga...,16646144,inner-structure-json
 ```
 http://domain/baga6ea4seaqad2ihnlr4fzyx4ycmir5m5ye73qj3we4hb5yvi5zndcyvsila.car
 ```
+### upload car files to KODO: 
+```sh
+./graphsplit upload 
+--car-dir=/path/to/car-dir \
+--bucket=ipfsgw \
+```
 
 Import car file to IPFS: 
 ```sh
