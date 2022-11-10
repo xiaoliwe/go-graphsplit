@@ -55,7 +55,7 @@ func Upload(ctx context.Context, carDir string) error {
 	fmt.Println(up)
 
 	//Get the manifest.csv and read CID of file.
-	records := readCsvFile("../17GData/manifest.csv")
+	records := readCsvFile(carDir + "manifest.csv")
 	fmt.Println(len(records))
 
 	for _, value := range records {
