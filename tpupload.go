@@ -12,6 +12,15 @@ import (
 	"github.com/qiniupd/qiniu-go-sdk/syncdata/operation"
 )
 
+type CsvRowData struct {
+	PayloadCID  string
+	Filename    string
+	URL         string
+	PieceCID    string
+	PayloadSize string
+	PieceSize   string
+}
+
 func readCsvFile(filePath string) [][]string {
 	f, err := os.Open(filePath)
 	if err != nil {
@@ -58,13 +67,17 @@ func Upload(ctx context.Context, carDir string) error {
 	records := readCsvFile(carDir + "manifest.csv")
 	fmt.Println(len(records))
 
-	for _, value := range records {
-		fmt.Printf(" %v\n", value)
+	for _, line := range records {
+		item := CsvRowData{
+			PayloadCID:  line[0],
+			Filename:    line[1],
+			URL:         line[2],
+			PieceCID:    line[3],
+			PayloadSize: line[4],
+			PieceSize:   line[5],
+		}
+		fmt.Printf(" %v\n", item.PayloadCID)
 	}
-
-	//Join the car file's path , like : /disk/17GData/xxxxxx.car
-
-	//upload the car file to kodo
 
 	return nil
 }
