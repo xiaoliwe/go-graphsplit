@@ -230,3 +230,7 @@ func Chunk(ctx context.Context, sliceSize int64, parentPath, targetPath, carDir,
 	}
 	return nil
 }
+
+func Upload(ctx context.Context, carDir, bucket string) error {
+	return nil
+}
