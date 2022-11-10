@@ -65,7 +65,7 @@ func Upload(ctx context.Context, carDir string) error {
 
 	//Get the manifest.csv and read CID of file.
 	records := readCsvFile(carDir + "manifest.csv")
-	fmt.Println(len(records))
+	fmt.Printf("----The row count is : %v", len(records))
 
 	for _, line := range records {
 		item := CsvRowData{
@@ -77,6 +77,8 @@ func Upload(ctx context.Context, carDir string) error {
 			PieceSize:   line[5],
 		}
 		fmt.Printf(" %v\n", item.PayloadCID)
+
+		fmt.Println(item.PayloadCID)
 	}
 
 	return nil
