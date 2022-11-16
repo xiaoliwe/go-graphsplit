@@ -13,7 +13,8 @@ sudo ldconfig
 wait $!
 echo 'Installing golang package....'
 #Install golang package
-wget /root/https://go.dev/dl/go1.19.3.linux-amd64.tar.gz 
+wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz -o /root/
+cd /root/
 rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
 echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
 echo 'Golang package finished !'
