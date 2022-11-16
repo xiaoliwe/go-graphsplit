@@ -10,6 +10,5 @@ sudo ldconfig
 
 #Setup the ~/.bashrc and user's env
 alias apt-up='apt update && apt upgrade'
-alias qshell='qshell -C /home/server/.qshell.json'
 
 
