@@ -9,7 +9,6 @@ echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/"' >> ~
 sudo ldconfig
 
 #Setup the ~/.bashrc and user's env
-echo 'alias apt-up='apt update && apt upgrade'' >> ~/.bashrc
 
 wait $!
 echo 'Installing golang package....'
