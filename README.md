@@ -73,7 +73,7 @@ Qm...,graph-slice-name.car,baga...,16646144,inner-structure-json
 ```
 ### cmd of example  
 ```
-./graphsplit chunk --car-dir=../17GData/ --slice-size=17289869184 --parallel=2 --graph-name=tp --calc-commp=true --add-padding=false --rename=false --parent-path=../SData/ ../SData/
+./graphsplit chunk --car-dir=../17GData/ --slice-size=18289869184 --parallel=2 --graph-name=tp --calc-commp=true --add-padding=false --rename=false --parent-path=../SData/ ../SData/
 ```
 
 ### external link example
