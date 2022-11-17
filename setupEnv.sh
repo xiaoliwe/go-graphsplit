@@ -2,12 +2,9 @@
 
 #install liblwloc-dev
 sudo apt install libhwloc-dev
-
-sleep 5
 wait $!
-sudo apt install pkg-config
 
-sleep 3
+sudo apt install pkg-config
 wait $!
 
 #install libIOpenCL
@@ -31,7 +28,7 @@ source ~/.bashrc
 echo '+++++++ Golang package finished !+++++++'
 
 
-echo '+++++++++ build repos....+++++++'
+echo '+++++++++ Begin to build repos....+++++++'
 #build repos
 git submodule update --init --recursive
 
