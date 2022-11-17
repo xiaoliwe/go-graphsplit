@@ -14,18 +14,18 @@ sudo ldconfig
 #Setup the ~/.bashrc and user's env
 
 wait $!
-echo 'Installing golang package....'
+echo '++++++++ Installing golang package....++++++'
 #Install golang package
 wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz 
 
-sleep 15
+sleep 10
 wait $!
 
 rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
 echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
-echo 'Golang package finished !'
+echo '+++++++ Golang package finished !+++++++'
 
-echo 'build repos....'
+echo '+++++++++ build repos....+++++++'
 #build repos
 git submodule update --init --recursive
 
