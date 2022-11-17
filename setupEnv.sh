@@ -5,6 +5,11 @@ sudo apt install libhwloc-dev
 
 sleep 5
 wait $!
+sudo apt install pkg-config
+
+sleep 3
+wait $!
+
 #install libIOpenCL
 sudo ln -s /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 /usr/lib/libOpenCL.so
 echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/"' >> ~/.bashrc
@@ -24,6 +29,7 @@ echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
 source ~/.bashrc
 
 echo '+++++++ Golang package finished !+++++++'
+
 
 echo '+++++++++ build repos....+++++++'
 #build repos
