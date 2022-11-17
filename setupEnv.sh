@@ -8,7 +8,13 @@ wait $!
 
 #install libIOpenCL
 sudo ln -s /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 /usr/lib/libOpenCL.so
-echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/"' >> ~/.bashrc
+#result=''
+if ！ command -v 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/"' &> /dev/null 
+then 
+    echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/"' >> ~/.bashrc
+    exit
+fi
+
 sudo ldconfig
 
 #Setup the ~/.bashrc and user's env
