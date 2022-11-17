@@ -3,6 +3,7 @@ module github.com/filedrive-team/go-graphsplit
 go 1.15
 
 require (
+	github.com/766b/go-outliner v0.0.0-20180511142203-fc6edecdadd7 // indirect
 	github.com/beeleelee/go-ds-rpc v0.1.0 // this needs to be updated too https://github.com/beeleelee/go-ds-rpc/pull/3
 	github.com/filecoin-project/go-commp-utils v0.1.3
 	github.com/filecoin-project/go-padreader v0.0.1

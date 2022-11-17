@@ -82,9 +82,7 @@ http://domain/baga6ea4seaqad2ihnlr4fzyx4ycmir5m5ye73qj3we4hb5yvi5zndcyvsila.car
 ```
 ### upload car files to KODO: 
 ```sh
-./graphsplit upload 
---car-dir=/path/to/car-dir \
---bucket=ipfsgw \
+./graphsplit upload-car --car-dir=/path/to/car-dir
 ```
 
 Import car file to IPFS: 
