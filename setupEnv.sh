@@ -21,11 +21,12 @@ echo '+++++++ installing golang package...+++++++'
 
 sleep 10
 wait $!
-rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
 echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
 source ~/.bashrc
 
 echo '+++++++ Golang package finished !+++++++'
+sudo rm -f go1.19.3.linux-amd64.tar.gz
 
 
 echo '+++++++++ Begin to build repos....+++++++'
