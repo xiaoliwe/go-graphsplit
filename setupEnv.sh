@@ -37,3 +37,8 @@ sleep 10
 wait $!
 
 make ffi && make
+
+sleep 10
+wait $!
+
+sudo apt-up
