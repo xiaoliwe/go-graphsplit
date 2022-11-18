@@ -80,9 +80,9 @@ Qm...,graph-slice-name.car,baga...,16646144,inner-structure-json
 ```
 http://domain/baga6ea4seaqad2ihnlr4fzyx4ycmir5m5ye73qj3we4hb5yvi5zndcyvsila.car
 ```
-### upload car files to KODO: 
+### upload car files to Kube: 
 ```sh
-./graphsplit upload-car --car-dir=/path/to/car-dir
+qshell qupload2 --src-dir=/path/to/carfiles  --bucket=name --check-exists=true --thread-count=6 --resumable-api-v2-part-size=268435456 --resumable-api-v2=true
 ```
 
 Import car file to IPFS: 
