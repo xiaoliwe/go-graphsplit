@@ -32,7 +32,7 @@ func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
 	commPStartTime := time.Now()
 	carFilePath := path.Join(cc.carDir, node.Cid().String()+".car")
 
-	log.Infof("fsDetail is : ", fsDetail)
+	//log.Infof("fsDetail is : ", fsDetail)
 
 	cpRes, err := CalcCommP(context.TODO(), carFilePath, cc.rename, cc.addPadding)
 	if err != nil {
