@@ -29,7 +29,7 @@ type commPCallback struct {
 }
 
 func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
-	fmt.Println("++++++++ Begin to calculation of pieceCID,it will take a long time? +++++++++")
+	fmt.Println("++++++++++++ Begin to calculation of pieceCID,it will take a long time? +++++++++")
 	commPStartTime := time.Now()
 	carFilePath := path.Join(cc.carDir, node.Cid().String()+".car")
 
@@ -41,12 +41,6 @@ func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
 	}
 	log.Infof("calculation of pieceCID completed, time elapsed: %s", time.Now().Sub(commPStartTime))
 	log.Infof("Begin to generate the manifest.csv file.....")
-
-	//rename car file
-	err = os.Rename(carFilePath, path.Join(cc.carDir, cpRes.Root.String()+".car"))
-	if err != nil {
-		log.Fatal(err)
-	}
 
 	// Add node info to manifest.csv
 	manifestPath := path.Join(cc.carDir, "manifest.csv")
@@ -81,6 +75,12 @@ func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
 		log.Fatal(errGetCS)
 	}
 	fmt.Printf("car size is :%v\n", size)
+
+	//rename car file
+	err = os.Rename(carFilePath, path.Join(cc.carDir, cpRes.Root.String()+".car"))
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	if err := csvWriter.Write([]string{
 		node.Cid().String(),                        // payload_cid
