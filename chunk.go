@@ -79,7 +79,7 @@ func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
 		graphName,                                  //filename
 		cpRes.Root.String(),                        //piece_cid
 		strconv.FormatUint(uint64(cpRes.Size), 10), //piece_size
-		strconv.FormatInt(node.RawData(),          //car size
+		strconv.Itoa(len((node.RawData()))),        //car size
 		"http://fildc.dstorage.tplab.dev/" + cpRes.Root.String() + ".car", // url
 	}); err != nil {
 		log.Fatal(err)
