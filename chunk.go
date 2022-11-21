@@ -74,12 +74,12 @@ func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
 	}
 
 	if err := csvWriter.Write([]string{
-		node.Cid().String(),                               // payload_cid
-		strconv.FormatInt(cpRes.PayloadSize, 10),          //payload_size
-		graphName,                                         //filename
-		cpRes.Root.String(),                               //piece_cid
-		strconv.FormatUint(uint64(cpRes.Size), 10),        //piece_size
-		strconv.FormatUint(uint64(cpRes.PayloadSize), 10), //car size
+		node.Cid().String(),                        // payload_cid
+		strconv.FormatInt(cpRes.PayloadSize, 10),   //payload_size
+		graphName,                                  //filename
+		cpRes.Root.String(),                        //piece_cid
+		strconv.FormatUint(uint64(cpRes.Size), 10), //piece_size
+		strconv.FormatInt(node.RawData(),          //car size
 		"http://fildc.dstorage.tplab.dev/" + cpRes.Root.String() + ".car", // url
 	}); err != nil {
 		log.Fatal(err)
