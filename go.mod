@@ -21,6 +21,7 @@ require (
 	github.com/ipfs/go-merkledag v0.6.0
 	github.com/ipfs/go-unixfs v0.3.1
 	github.com/ipld/go-car v0.3.3
+	github.com/ipld/go-car/v2 v2.5.1
 	github.com/ipld/go-ipld-prime v0.16.0
 	github.com/qiniupd/qiniu-go-sdk v1.4.0
 	github.com/urfave/cli/v2 v2.6.0

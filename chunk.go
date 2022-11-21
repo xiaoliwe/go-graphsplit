@@ -11,6 +11,7 @@ import (
 
 	ipld "github.com/ipfs/go-ipld-format"
 	logging "github.com/ipfs/go-log/v2"
+	carv2 "github.com/ipld/go-car/v2"
 	"golang.org/x/xerrors"
 )
 
@@ -73,13 +74,20 @@ func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
 		})
 	}
 
+	// get the size of the CAR file
+	rd, err := carv2.OpenReader(carFilePath)
+	size, errGetCS := getCarSize(carFilePath, rd)
+	if err != nil {
+		log.Fatal(errGetCS)
+	}
+
 	if err := csvWriter.Write([]string{
 		node.Cid().String(),                        // payload_cid
 		strconv.FormatInt(cpRes.PayloadSize, 10),   //payload_size
 		graphName,                                  //filename
 		cpRes.Root.String(),                        //piece_cid
 		strconv.FormatUint(uint64(cpRes.Size), 10), //piece_size
-		strconv.Itoa(len((node.RawData()))),        //car size
+		strconv.FormatInt,(size),                    //car size
 		"http://fildc.dstorage.tplab.dev/" + cpRes.Root.String() + ".car", // url
 	}); err != nil {
 		log.Fatal(err)
@@ -129,6 +137,20 @@ type errCallback struct{}
 func (cc *errCallback) OnSuccess(ipld.Node, string, string) {}
 func (cc *errCallback) OnError(err error) {
 	log.Fatal(err)
+}
+func getCarSize(filepath string, rd *carv2.Reader) (int64, error) {
+	var size int64
+	switch rd.Version {
+	case 2:
+		size = int64(rd.Header.DataSize)
+	case 1:
+		st, err := os.Stat(filepath)
+		if err != nil {
+			return 0, fmt.Errorf("failed to get CARv1 file size: %w", err)
+		}
+		size = st.Size()
+	}
+	return size, nil
 }
 
 func CommPCallback(carDir string, rename, addPadding bool) GraphBuildCallback {
