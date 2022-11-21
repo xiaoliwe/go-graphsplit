@@ -32,18 +32,6 @@ func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
 	commPStartTime := time.Now()
 	carFilePath := path.Join(cc.carDir, node.Cid().String()+".car")
 
-	// get carSize
-	rdr, errOpenFile := os.OpenFile(carFilePath, os.O_RDWR, 0644)
-	if errOpenFile != nil {
-		log.Fatal(errOpenFile)
-	}
-	defer rdr.Close()
-	stat, errStatus := rdr.Stat()
-	if errStatus != nil {
-		log.Fatal(errStatus)
-	}
-	carSize := stat.Size()
-
 	log.Infof("fsDetail is : ", fsDetail)
 
 	cpRes, err := CalcCommP(context.TODO(), carFilePath, cc.rename, cc.addPadding)
@@ -86,12 +74,12 @@ func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
 	}
 
 	if err := csvWriter.Write([]string{
-		node.Cid().String(),                        // payload_cid
-		strconv.FormatInt(cpRes.PayloadSize, 10),   //payload_size
-		graphName,                                  //filename
-		cpRes.Root.String(),                        //piece_cid
-		strconv.FormatUint(uint64(cpRes.Size), 10), //piece_size
-		strconv.FormatUint(uint64(carSize), 10),    //car size
+		node.Cid().String(),                               // payload_cid
+		strconv.FormatInt(cpRes.PayloadSize, 10),          //payload_size
+		graphName,                                         //filename
+		cpRes.Root.String(),                               //piece_cid
+		strconv.FormatUint(uint64(cpRes.Size), 10),        //piece_size
+		strconv.FormatUint(uint64(cpRes.PayloadSize), 10), //car size
 		"http://fildc.dstorage.tplab.dev/" + cpRes.Root.String() + ".car", // url
 	}); err != nil {
 		log.Fatal(err)
