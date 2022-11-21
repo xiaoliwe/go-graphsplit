@@ -80,6 +80,7 @@ func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
 	if err != nil {
 		log.Fatal(errGetCS)
 	}
+	fmt.Printf("car size is :%v\n", size)
 
 	if err := csvWriter.Write([]string{
 		node.Cid().String(),                        // payload_cid
@@ -87,7 +88,7 @@ func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
 		graphName,                                  //filename
 		cpRes.Root.String(),                        //piece_cid
 		strconv.FormatUint(uint64(cpRes.Size), 10), //piece_size
-		strconv.FormatInt,(size),                    //car size
+		strconv.FormatInt(size, 10),                //car size
 		"http://fildc.dstorage.tplab.dev/" + cpRes.Root.String() + ".car", // url
 	}); err != nil {
 		log.Fatal(err)
