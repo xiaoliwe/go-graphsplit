@@ -128,7 +128,6 @@ func (b *FSBuilder) getNodeByLink(ln *format.Link) (fn fsNode, err error) {
 func BuildIpldGraph(ctx context.Context, fileList []Finfo, graphName, parentPath, carDir string, parallel int, cb GraphBuildCallback) {
 	node, fsDetail, err := buildIpldGraph(ctx, fileList, parentPath, carDir, parallel)
 	if err != nil {
-		//log.Fatal(err)
 		cb.OnError(err)
 		return
 	}
@@ -277,7 +276,8 @@ func buildIpldGraph(ctx context.Context, fileList []Finfo, parentPath, carDir st
 	fmt.Printf("root node cid: %s\n", rootNode.Cid())
 	log.Infof("start to generate car for %s", rootNode.Cid())
 	genCarStartTime := time.Now()
-	//car
+
+	//generate a car
 	carF, err := os.Create(path.Join(carDir, rootNode.Cid().String()+".car"))
 	if err != nil {
 		return nil, "", err
@@ -286,6 +286,7 @@ func buildIpldGraph(ctx context.Context, fileList []Finfo, parentPath, carDir st
 	selector := allSelector()
 	sc := car.NewSelectiveCar(ctx, bs2, []car.Dag{{Root: rootNode.Cid(), Selector: selector}})
 	err = sc.Write(carF)
+
 	// cario := cario.NewCarIO()
 	// err = cario.WriteCar(context.Background(), bs2, rootNode.Cid(), selector, carF)
 	if err != nil {

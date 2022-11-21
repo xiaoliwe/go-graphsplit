@@ -29,20 +29,43 @@ type commPCallback struct {
 
 func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
 	fmt.Println("++++++++ Begin to calculation of pieceCID,it will take a long time? +++++++++")
-	commpStartTime := time.Now()
-	carfilepath := path.Join(cc.carDir, node.Cid().String()+".car")
-	cpRes, err := CalcCommP(context.TODO(), carfilepath, cc.rename, cc.addPadding)
+	commPStartTime := time.Now()
+	carFilePath := path.Join(cc.carDir, node.Cid().String()+".car")
+
+	// get carSize
+	rdr, errOpenFile := os.OpenFile(carFilePath, os.O_RDWR, 0644)
+	if errOpenFile != nil {
+		log.Fatal(errOpenFile)
+	}
+	defer rdr.Close()
+	stat, errStatus := rdr.Stat()
+	if errStatus != nil {
+		log.Fatal(errStatus)
+	}
+	carSize := stat.Size()
+
+	log.Infof("fsDetail is : ", fsDetail)
+
+	cpRes, err := CalcCommP(context.TODO(), carFilePath, cc.rename, cc.addPadding)
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Infof("calculation of pieceCID completed, time elapsed: %s", time.Now().Sub(commpStartTime))
+	log.Infof("calculation of pieceCID completed, time elapsed: %s", time.Now().Sub(commPStartTime))
 	log.Infof("Begin to generate the manifest.csv file.....")
-	// Add node inof to manifest.csv
+
+	//rename car file
+	err = os.Rename(carFilePath, path.Join(cc.carDir, cpRes.Root.String()+".car"))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Add node info to manifest.csv
 	manifestPath := path.Join(cc.carDir, "manifest.csv")
 	_, err = os.Stat(manifestPath)
 	if err != nil && !os.IsNotExist(err) {
 		log.Fatal(err)
 	}
+
 	var isCreateAction bool
 	if err != nil && os.IsNotExist(err) {
 		isCreateAction = true
@@ -58,12 +81,18 @@ func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
 	defer csvWriter.Flush()
 	if isCreateAction {
 		csvWriter.Write([]string{
-			"playload_cid", "filename", "url", "piece_cid", "payload_size", "piece_size",
+			"Payload_cid", "payload_size", "filename", "piece_cid", "piece_size", "car_size", "url",
 		})
 	}
 
 	if err := csvWriter.Write([]string{
-		node.Cid().String(), graphName, "https://111.111.111.11/xxx/" + node.Cid().String() + ".car", cpRes.Root.String(), strconv.FormatInt(cpRes.PayloadSize, 10), strconv.FormatUint(uint64(cpRes.Size), 10),
+		node.Cid().String(),                        // payload_cid
+		strconv.FormatInt(cpRes.PayloadSize, 10),   //payload_size
+		graphName,                                  //filename
+		cpRes.Root.String(),                        //piece_cid
+		strconv.FormatUint(uint64(cpRes.Size), 10), //piece_size
+		strconv.FormatUint(uint64(carSize), 10),    //car size
+		"http://fildc.dstorage.tplab.dev/" + cpRes.Root.String() + ".car", // url
 	}); err != nil {
 		log.Fatal(err)
 	}
@@ -78,7 +107,7 @@ type csvCallback struct {
 }
 
 func (cc *csvCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
-	// Add node inof to manifest.csv
+	// Add node info to manifest.csv
 	manifestPath := path.Join(cc.carDir, "manifest.csv")
 	_, err := os.Stat(manifestPath)
 	if err != nil && !os.IsNotExist(err) {
