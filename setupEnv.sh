@@ -1,36 +1,36 @@
 #!/bin/bash
+printf "\n"
+echo "<------ Updating the OS enviroments ------>"
+sudo apt update && apt upgrade -y
 
-#install liblwloc-dev
+sleep 5
+wait $!
+
+echo "<------ Installing liblwloc-dev and pkc-config ------>"
 sudo apt install libhwloc-dev
-wait $!
-
 sudo apt install pkg-config
+
+sleep 2
 wait $!
 
-#install libIOpenCL
+echo "<------ Installing libIOpenCL ------>"
 sudo ln -s /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 /usr/lib/libOpenCL.so
-echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/"' >> ~/.bashrc
-sudo ldconfig
+echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/'" >>~/.bashrc
+echo "alias brc='source ~/.bashrc'" >>~/.bashrc
 
-#Setup the ~/.bashrc and user's env
-echo '++++++++ Installing golang package....++++++'
-#Install golang package
-wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz 
-
-echo '+++++++ installing golang package...+++++++'
-
-sleep 10
+echo "<------ Installing golang package ------>"
+wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz
+sleep 3
 wait $!
 sudo rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
-echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
-source ~/.bashrc
+echo "export PATH=$PATH:/usr/local/go/bin" >>~/.bashrc
+sudo ldconfig
+brc
 
-echo '+++++++ Golang package finished !+++++++'
+echo "<------ Golang package finished! and remove golang package ------>"
 sudo rm -f go1.19.3.linux-amd64.tar.gz
 
-
-echo '+++++++++ Begin to build repos....+++++++'
-#build repos
+echo "<------Begin to git submodule update ------>"
 git submodule update --init --recursive
 
 sleep 10
@@ -40,5 +40,3 @@ make ffi && make
 
 sleep 10
 wait $!
-
-sudo apt-up
