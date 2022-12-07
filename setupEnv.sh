@@ -7,8 +7,8 @@ sleep 5
 wait $!
 
 echo "<------ Installing liblwloc-dev and pkc-config ------>"
-sudo apt install libhwloc-dev
-sudo apt install pkg-config
+sudo apt install -y libhwloc-dev
+sudo apt install -y pkg-config
 
 sleep 2
 wait $!
