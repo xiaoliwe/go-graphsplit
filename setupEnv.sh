@@ -5,14 +5,14 @@ sudo apt update && apt upgrade -y
 
 sleep 5
 wait $!
-
+printf "\n"
 echo "<------ Installing liblwloc-dev and pkc-config ------>"
 sudo apt install -y libhwloc-dev
 sudo apt install -y pkg-config
 
 sleep 2
 wait $!
-
+printf "\n"
 echo "<------ Installing libIOpenCL ------>"
 sudo ln -s /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 /usr/lib/libOpenCL.so
 
@@ -21,7 +21,7 @@ if cat ~/.bashrc | grep 'export LD_LIBRARY_PATH'; then
 else
     echo "export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/" >>~/.bashrc
 fi
-
+printf "\n"
 echo "<------ Installing golang package ------>"
 if cat ~/.bashrc | grep '/usr/local/go/bin'; then
     echo "golang has exists!"
@@ -37,7 +37,7 @@ else
     echo "<------ Golang package finished! and remove golang package ------>"
     sudo rm -f go1.19.3.linux-amd64.tar.gz
 fi
-
+printf "\n"
 echo "<------Begin to git submodule update ------>"
 git submodule update --init --recursive
 
