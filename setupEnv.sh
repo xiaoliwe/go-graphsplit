@@ -19,7 +19,7 @@ sudo ln -s /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 /usr/lib/libOpenCL.so
 if cat ~/.bashrc | grep 'export LD_LIBRARY_PATH'; then
     echo "LD_LIBRARAY_PATH has exists!"
 else
-    echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/'" >>~/.bashrc
+    echo "export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/" >>~/.bashrc
 fi
 
 echo "<------ Installing golang package ------>"
