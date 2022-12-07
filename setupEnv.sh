@@ -16,7 +16,6 @@ wait $!
 echo "<------ Installing libIOpenCL ------>"
 sudo ln -s /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 /usr/lib/libOpenCL.so
 echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/'" >>~/.bashrc
-echo "alias brc='source ~/.bashrc'" >>~/.bashrc
 
 echo "<------ Installing golang package ------>"
 wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz
@@ -25,7 +24,7 @@ wait $!
 sudo rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
 echo "export PATH=$PATH:/usr/local/go/bin" >>~/.bashrc
 sudo ldconfig
-brc
+source ~/.bashrc
 
 echo "<------ Golang package finished! and remove golang package ------>"
 sudo rm -f go1.19.3.linux-amd64.tar.gz
