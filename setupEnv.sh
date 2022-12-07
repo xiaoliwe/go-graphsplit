@@ -15,19 +15,28 @@ wait $!
 
 echo "<------ Installing libIOpenCL ------>"
 sudo ln -s /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 /usr/lib/libOpenCL.so
-echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/'" >>~/.bashrc
+
+if cat ~/.bashrc | grep 'export LD_LIBRARY_PATH'; then
+    echo "LD_LIBRARAY_PATH has exists!"
+else
+    echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/'" >>~/.bashrc
+fi
 
 echo "<------ Installing golang package ------>"
-wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz
-sleep 3
-wait $!
-sudo rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
-echo "export PATH=$PATH:/usr/local/go/bin" >>~/.bashrc
-sudo ldconfig
-source ~/.bashrc
+if cat ~/.bashrc | grep '/usr/local/go/bin'; then
+    echo "golang has exists!"
+else
+    wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz
+    sleep 3
+    wait $!
+    sudo rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
+    echo "export PATH=$PATH:/usr/local/go/bin" >>~/.bashrc
+    sudo ldconfig
+    source ~/.bashrc
 
-echo "<------ Golang package finished! and remove golang package ------>"
-sudo rm -f go1.19.3.linux-amd64.tar.gz
+    echo "<------ Golang package finished! and remove golang package ------>"
+    sudo rm -f go1.19.3.linux-amd64.tar.gz
+fi
 
 echo "<------Begin to git submodule update ------>"
 git submodule update --init --recursive
