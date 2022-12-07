@@ -32,11 +32,12 @@ else
     sudo rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
     echo "export PATH=$PATH:/usr/local/go/bin" >>~/.bashrc
     sudo ldconfig
-    source ~/.bashrc
 
     echo "<------ Golang package finished! and remove golang package ------>"
     sudo rm -f go1.19.3.linux-amd64.tar.gz
 fi
+
+source ~/.bashrc
 printf "\n"
 echo "<------Begin to git submodule update ------>"
 git submodule update --init --recursive
@@ -48,3 +49,4 @@ make ffi && make
 
 sleep 10
 wait $!
+echo "<------ All the packages has finished and Enviroment was setup!--->"
