@@ -64,9 +64,9 @@ echo "$info|・・・・ Set up the graphsplit env to bashrc ・・・・| $left
 if cat ~/.bashrc | grep 'export graphsplit'; then
     echo "$info|・・・・ Reload bashrc file ・・・・[ $warning ]"
 else
-    echo "export graphsplit='$CUR_DIR/graphsplit'" >>"$HOME"/.bashrc
+    echo "export graphsplit='$CUR_DIR/graphsplit'" >>/etc/environment
     echo "$info|・・・・ Reload bashrc file ・・・・| $leftinfo "
-    source ~/.bashrc
+    source /etc/environment
 fi
 
 echo "$info|・・・・ All the packages has finished and Enviroment was setup!・・・・[ $success ]"
