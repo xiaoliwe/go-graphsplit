@@ -77,10 +77,10 @@ func (cc *commPCallback) OnSuccess(node ipld.Node, graphName, fsDetail string) {
 	fmt.Printf("car size is :%v\n", size)
 
 	//rename car file
-	// err = os.Rename(carFilePath, path.Join(cc.carDir, cpRes.Root.String()+".car"))
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	err = os.Rename(carFilePath, path.Join(cc.carDir, cpRes.Root.String()+".car"))
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	if err := csvWriter.Write([]string{
 		node.Cid().String(),                        // payload_cid
