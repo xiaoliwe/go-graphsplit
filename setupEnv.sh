@@ -61,8 +61,12 @@ wait $!
 CUR_DIR=$(pwd)
 
 echo "$info|・・・・ Set up the graphsplit env to bashrc ・・・・| $leftinfo "
-echo "export graphsplit='$CUR_DIR/graphsplit'" >>"$HOME"/.bashrc
-echo "$info|・・・・ Reload bashrc file ・・・・| $leftinfo "
-source ~/.bashrc
+if cat ~/.bashrc | grep 'export graphsplit'; then
+    echo "$info|・・・・ Reload bashrc file ・・・・[ $warning ]"
+else
+    echo "export graphsplit='$CUR_DIR/graphsplit'" >>"$HOME"/.bashrc
+    echo "$info|・・・・ Reload bashrc file ・・・・| $leftinfo "
+    source ~/.bashrc
+fi
 
 echo "$info|・・・・ All the packages has finished and Enviroment was setup!・・・・[ $success ]"
