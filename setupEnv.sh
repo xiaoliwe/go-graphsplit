@@ -5,23 +5,24 @@ success="✅"
 error="❌"
 warning="⚠️"
 tips="💡"
+leftinfo="⇠"
 info="⇢"
 
 printf "\n"
-echo "$info|・・・・ Updating the OS enviroments ・・・・[ $tips ] "
+echo "$info|・・・・ Updating the OS enviroments ・・・・[ $leftinfo ] "
 sudo apt update && apt upgrade -y
 
 sleep 5
 wait $!
 printf "\n"
-echo "$info|・・・・ Installing liblwloc-dev and pkc-config ・・・・[ $tips ] "
+echo "$info|・・・・ Installing liblwloc-dev and pkc-config ・・・・[ $leftinfo ] "
 sudo apt install -y libhwloc-dev
 sudo apt install -y pkg-config
 
 sleep 2
 wait $!
 printf "\n"
-echo "$info|・・・・ Installing libIOpenCL ・・・・[ $tips ]"
+echo "$info|・・・・ Installing libIOpenCL ・・・・[ $leftinfo ]"
 sudo ln -s /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 /usr/lib/libOpenCL.so
 
 if cat ~/.bashrc | grep 'export LD_LIBRARY_PATH'; then
@@ -30,7 +31,7 @@ else
     echo "export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/" >>"$HOME"/.bashrc
 fi
 printf "\n"
-echo "$info|・・・・ Installing golang package ・・・・[ $tips ] "
+echo "$info|・・・・ Installing golang package ・・・・[ $leftinfo ] "
 if cat ~/.bashrc | grep '/usr/local/go/bin'; then
     echo "$info|・・・・ Golang has exists!・・・・[ $warning ]"
 else
@@ -47,7 +48,7 @@ fi
 
 source ~/.bashrc
 printf "\n"
-echo "$info|・・・・ Begin to git submodule update ・・・・[ $tips ]"
+echo "$info|・・・・ Begin to git submodule update ・・・・[ $leftinfo ]"
 git submodule update --init --recursive
 
 sleep 10
@@ -59,9 +60,9 @@ sleep 10
 wait $!
 CUR_DIR=$(pwd)
 
-echo "$info|・・・・ Set up the graphsplit env to bashrc ・・・・[ $tips ]"
+echo "$info|・・・・ Set up the graphsplit env to bashrc ・・・・[ $leftinfo ]"
 echo "export graphsplit='$CUR_DIR/graphsplit'" >>"$HOME"/.bashrc
-echo "$info|・・・・ Reload bashrc file ・・・・[ $tips ]"
+echo "$info|・・・・ Reload bashrc file ・・・・[ $leftinfo ]"
 source ~/.bashrc
 
 echo "$info|・・・・ All the packages has finished and Enviroment was setup!・・・・[ $success ]"
