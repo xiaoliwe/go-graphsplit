@@ -61,12 +61,12 @@ wait $!
 CUR_DIR=$(pwd)
 
 echo "$info|・・・・ Set up the graphsplit env to bashrc ・・・・| $leftinfo "
-cp "$CUR_DIR"/graphsplit /usr/local/bin
+cp "$CUR_DIR"/graphsplit /usr/local/graphsplit/bin
 
 if cat ~/.bashrc | grep 'export graphsplit'; then
     echo "$info|・・・・ Reload bashrc file ・・・・[ $warning ]"
 else
-    echo "export PATH=$PATH:/usr/local/bin" >>"$HOME"/.bashrc
+    echo "export PATH=$PATH:/usr/local/graphsplit/bin" >>"$HOME"/.bashrc
     echo "$info|・・・・ Reload bashrc file ・・・・| $leftinfo "
     source ~/.bashrc
 fi
