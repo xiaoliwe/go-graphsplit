@@ -16,7 +16,7 @@ else
     wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz
     sleep 3
     wait $!
-    rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
+    tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
     echo "export PATH=$PATH:/usr/local/go/bin" >>"$HOME"/.bashrc
 
     echo "$info|・・・・ Golang package finished! and remove golang package・・・・[ $success ]"
