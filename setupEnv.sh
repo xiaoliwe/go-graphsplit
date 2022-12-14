@@ -35,7 +35,7 @@ else
     echo "$info|・・・・ Rustup has exists!・・・・[ $warning ]"
 fi
 
-source ~/.bashrc
+source "$HOME/.bashrc"
 printf "\n"
 echo "$info|・・・・ Begin to git submodule update ・・・・| $leftinfo "
 git submodule update --init --recursive
