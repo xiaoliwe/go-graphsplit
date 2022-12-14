@@ -56,7 +56,7 @@ if cat ~/.bashrc | grep 'export graphsplit'; then
 else
     echo "export graphsplit='$CUR_DIR'" >>"$HOME"/.bashrc
     echo "$info|・・・・ Reload bashrc file ・・・・| $leftinfo "
-    source ~/.bashrc
+    source "$HOME/.bashrc"
 fi
 
 echo "$info|・・・・ All the packages has finished and Enviroment was setup!・・・・[ $success ]"
