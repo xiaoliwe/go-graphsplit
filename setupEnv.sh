@@ -13,9 +13,12 @@ echo "$info|・・・・ Installing golang package ・・・・| $leftinfo  "
 if cat ~/.bashrc | grep '/usr/local/go/bin'; then
     echo "$info|・・・・ Golang has exists!・・・・[ $warning ]"
 else
-    wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz
-    sleep 3
-    wait $!
+    CUR_DIR=$(pwd)
+    if [ ! -f "$CUR_DIR/go1.19.3.linux-amd64.tar.gz" ]; then
+        wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz
+        sleep 3
+        wait $!
+    fi
     tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
     echo "export PATH=$PATH:/usr/local/go/bin" >>"$HOME"/.bashrc
 
