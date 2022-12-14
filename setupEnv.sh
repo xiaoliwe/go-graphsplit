@@ -23,7 +23,7 @@ else
     echo "export PATH=$PATH:/usr/local/go/bin" >>"$HOME"/.bashrc
 
     echo "$info|・・・・ Golang package finished! and remove golang package・・・・[ $success ]"
-    sudo rm -f go1.19.3.linux-amd64.tar.gz
+
 fi
 
 printf "\n"
