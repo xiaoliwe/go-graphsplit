@@ -10,7 +10,7 @@ info="⇢"
 
 printf "\n"
 echo "$info|・・・・ Installing golang package ・・・・| $leftinfo  "
-if cat ~/.bashrc | grep '/usr/local/go/bin'; then
+if which go; then
     echo "$info|・・・・ Golang has exists!・・・・[ $warning ]"
 else
     CUR_DIR=$(pwd)
